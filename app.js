@@ -36,23 +36,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-app.get('/api/sendText/:phone', (req, res) => {
-    const apiKey = req.query.apiKey;
 
-    // تحقق من صحة مفتاح الـ API
-    if (apiKey !== 'your-secret-api-key') {
-        return res.status(403).send('Unauthorized');
-    }
-
-    const phone = req.params.phone;
-    const text = req.query.text;
-
-    client.sendMessage(`${phone}@c.us`, text)
-        .then(response => {
-            res.send('Message sent successfully!');
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).send('Failed to send message');
-        });
-});
